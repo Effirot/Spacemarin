@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <levelName>k__BackingField: 
   <AllGeneratableObjects>k__BackingField:
-  - <Frequency>k__BackingField: 0
+  - <Frequency>k__BackingField: 84
     <SpawnPattern>k__BackingField:
       <GenerationPrefab>k__BackingField: {fileID: 0}
       <PossibleMeshes>k__BackingField: []
@@ -24,7 +24,8 @@ MonoBehaviour:
       <MaxSizePercent>k__BackingField: 100
       <MinSizePercent>k__BackingField: 50
       <ModelRandomRotation>k__BackingField: 0
-    <SpawnConditions>k__BackingField: []
+    <SpawnConditions>k__BackingField:
+    - rid: 6151021451882528774
   - <Frequency>k__BackingField: 0
     <SpawnPattern>k__BackingField:
       <GenerationPrefab>k__BackingField: {fileID: 0}
@@ -49,3 +50,7 @@ MonoBehaviour:
       type: {class: SpawnAfter, ns: ClassLibrary, asm: Assembly-CSharp}
       data:
         <AfterProgress>k__BackingField: 10
+    - rid: 6151021451882528774
+      type: {class: SpawnAfter, ns: ClassLibrary, asm: Assembly-CSharp}
+      data:
+        <AfterProgress>k__BackingField: 0
