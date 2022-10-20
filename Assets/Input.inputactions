@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Fire",
-                    "type": "Value",
-                    "id": "426d2f62-d926-4823-bf72-46b575c432b9",
-                    "expectedControlType": "Integer",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -154,17 +145,6 @@
                     "processors": "",
                     "groups": "Joystick",
                     "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d1630357-8bfc-4a03-a3c5-c04e1c63e4c3",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
