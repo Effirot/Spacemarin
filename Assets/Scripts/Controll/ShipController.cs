@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Runtime.Serialization;
+using System.Linq;
 using ClassLibrary;
+using System;
 
 public partial class ShipController : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public partial class ShipController : MonoBehaviour
 
     Vector2 TargetPoint = Vector2.zero;
 
+    [field: SerializeField]public ShootController[] ShootController;
 
     protected virtual void FixedUpdate()
     {
@@ -30,21 +33,13 @@ public partial class ShipController : MonoBehaviour
             var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
             
             var rot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, IsControlling? angle + 90 : 0), 0.09f);
-            rot.Normalize();
             transform.rotation = rot;
         #endregion
     }
-    public virtual void Shoot(Vector2 Target){
-        
+
+    void OnMove(InputValue value){
+        if(IsControlling) 
+            MoveVector = value.Get<Vector2>();
     }
-
-    #region Controlling 
-        public void Move(InputValue value){
-            if(IsControlling) 
-                MoveVector = value.Get<Vector2>();
-        }
-        public void Fire() => Shoot(transform.up);
-    #endregion
-
-
+    public void OnFire(InputValue value) => Array.ForEach(ShootController, a=>a.Shoot(transform.up * 20));
 }

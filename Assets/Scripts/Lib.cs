@@ -11,6 +11,14 @@ using ClassLibrary;
 #nullable enable
 
 namespace ClassLibrary{
+    public static class Additions{
+        public static bool AllTrue(this IEnumerable<bool> values){
+            foreach(var value in values)
+                if(value) return false;
+
+            return true;
+        }
+    }
 
     [Serializable]
     public class GeneratableObjectPattern{
@@ -74,20 +82,16 @@ namespace ClassLibrary{
                     rb.AddForce(GetVector() * 100);
                     if(ModelRandomRotation)
                         rb.AddTorque(ValueGenerator.Next(-1000, 1000));
-                }            
+                }
             }
-            Debug.Log("Spawned");
-            
-            
         }
     }   
-
 
     [Serializable] public abstract class SpawnCondition{
         public abstract bool IsChecked { get; }
         public static implicit operator bool(SpawnCondition condition) => condition.IsChecked;
 
-        public float CurrentLevelProgress => LevelController.CurrentProgress;
+        public static float CurrentLevelProgress => LevelController.CurrentProgress;
     }
     [Serializable] public class SpawnBefore : SpawnCondition{
         [field: SerializeField, Range(0, 100)] public int BeforeProgress { get; set; }

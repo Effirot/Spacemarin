@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour{
     public static float CurrentProgress = 0.0f;
     public LevelSettings? Pattern;
 
-    public float ProgressPerTick = 0.001f;
+    public float ProgressPerTick = 0.01f;
 
     public static Coroutine? routine;
     
@@ -25,17 +25,13 @@ public class LevelController : MonoBehaviour{
     public void GenerateObjectTick(){
         if(Pattern == null) throw new ArgumentNullException("Pattern is null");
 
-        var rnd = new Random();
-        foreach(var Object in Pattern.AllGeneratableObjects){
-            if(rnd.Next(0, 100) >= Object.Frequency)
-                Object.SpawnPattern.GenerateObject();
-        }
+        Pattern.GenerateTick();
     }
 
     IEnumerator TickTimer(){
         while(Pattern != null){
             CurrentProgress+=ProgressPerTick;
-            foreach(var a in Pattern.AllGeneratableObjects) a.SpawnPattern.GenerateObject();
+            foreach(var a in Pattern.AllGeneratableObjects) GenerateObjectTick();
             for(int i = 0; i<20; i++) yield return new WaitForFixedUpdate();
         }
     }
