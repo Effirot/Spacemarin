@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b525b8555c9c24e8e7f4e74c5f4faa, type: 3}
+  m_Name: GenerationSettings
+  m_EditorClassIdentifier: 
+  <levelName>k__BackingField: 
+  <AllGeneratableObjects>k__BackingField:
+  - <Frequency>k__BackingField: 99
+    <SpawnPattern>k__BackingField:
+      <GenerationPrefab>k__BackingField: {fileID: 6948440734123762919, guid: 34d354ab277558644b7cf4bdcb5ca291, type: 3}
+      <PossibleMeshes>k__BackingField:
+      - {fileID: 7803778804846005805, guid: 9383081dcea3c24429573551ce8556de, type: 3}
+      - {fileID: 2714248295958697210, guid: 9383081dcea3c24429573551ce8556de, type: 3}
+      - {fileID: 2333377969145535379, guid: 9383081dcea3c24429573551ce8556de, type: 3}
+      - {fileID: 2621838422776490973, guid: 9383081dcea3c24429573551ce8556de, type: 3}
+      - {fileID: 1154284828965514794, guid: 9383081dcea3c24429573551ce8556de, type: 3}
+      - {fileID: -3539359204716853892, guid: 9383081dcea3c24429573551ce8556de, type: 3}
+      <PossibleSpawnPositions>k__BackingField:
+      - {x: 10, y: 10}
+      <PossibleSpawnForceVector1>k__BackingField: {x: 4.91, y: -12}
+      <PossibleSpawnForceVector2>k__BackingField: {x: -4.01, y: -12}
+      <MaxSizePercent>k__BackingField: 379
+      <MinSizePercent>k__BackingField: 120
+      <ModelRandomRotation>k__BackingField: 0
+    <SpawnConditions>k__BackingField:
+    - rid: 6151021451882528774
+  references:
+    version: 2
+    RefIds:
+    - rid: 6151021451882528774
+      type: {class: SpawnAfter, ns: ClassLibrary, asm: Assembly-CSharp}
+      data:
+        <AfterProgress>k__BackingField: 0

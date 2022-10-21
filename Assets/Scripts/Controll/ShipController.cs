@@ -15,6 +15,7 @@ public partial class ShipController : MonoBehaviour
 
     Vector2 TargetPoint = Vector2.zero;
 
+
     protected virtual void FixedUpdate()
     {
         #region Moving
@@ -33,9 +34,17 @@ public partial class ShipController : MonoBehaviour
             transform.rotation = rot;
         #endregion
     }
-    
-    public int Attack;
-    public void OnMove(InputValue value){
-        if(IsControlling) MoveVector = value.Get<Vector2>();
+    public virtual void Shoot(Vector2 Target){
+        
     }
+
+    #region Controlling 
+        public void Move(InputValue value){
+            if(IsControlling) 
+                MoveVector = value.Get<Vector2>();
+        }
+        public void Fire() => Shoot(transform.up);
+    #endregion
+
+
 }

@@ -24,7 +24,7 @@ namespace ClassLibrary{
         public static UnityEvent<GameObject?> LastGeneratedObject = new UnityEvent<GameObject?>();
 
         [field: SerializeField] public Mesh[] PossibleMeshes { get; set; } = new Mesh[] {};
-        public Mesh? GetMesh (){
+        public Mesh? GetMesh(){
             try { return PossibleMeshes[ValueGenerator.Next(0, PossibleMeshes.Length)]; }
             catch { } 
             return null; 
@@ -38,8 +38,9 @@ namespace ClassLibrary{
         }
 
         [field: Space]
-        [field: SerializeField] public Vector2 PossibleMaxSpawnForceVector { get; set; }
-        [field: SerializeField] public Vector2 PossibleMinSpawnForceVector { get; set; }
+        [field: SerializeField] public Vector2 PossibleSpawnForceVector1 { get; set; }
+        [field: SerializeField] public Vector2 PossibleSpawnForceVector2 { get; set; }
+        public Vector2 GetVector() => PossibleSpawnForceVector1 + ((PossibleSpawnForceVector1 - PossibleSpawnForceVector2) * (float)ValueGenerator.NextDouble());
 
         [field: Space]
         [field: SerializeField, Range(1, 500)] public int MaxSizePercent { get; set; } = 100;
@@ -52,20 +53,30 @@ namespace ClassLibrary{
         [field: Space]
         [field: SerializeField] public bool ModelRandomRotation { get; set; }
         
-
-
-        public virtual void GenerateObject(){
+        public void GenerateObject(){
             if(MaxSizePercent < MinSizePercent) throw new ArgumentException("MaxSizePercent must be less than MinSizePercent");
             if(GenerationPrefab == null) throw new ArgumentException("Prefab was not set");
             
-            LastCreated = GameObject.Instantiate(GenerationPrefab);
+            LastCreated = GameObject.Instantiate(
+                GenerationPrefab, 
+                GetPosition() ?? new Vector2(0, 0), 
+                Quaternion.identity);
+
             lock(LastCreated)
             {
+                var mesh = GetMesh();
+                var rb = LastCreated.GetComponent<Rigidbody2D>();
 
-                if(LastCreated.GetComponent<Rigidbody2D>()) {
+                LastCreated.transform.localScale = (ValueGenerator.Next(MinSizePercent, MaxSizePercent) / 100f) * Vector3.one;
 
-                }
+                if(mesh != null) LastCreated.GetComponent<MeshFilter>().mesh = mesh;
+                if(rb != null) {
+                    rb.AddForce(GetVector() * 100);
+                    if(ModelRandomRotation)
+                        rb.AddTorque(ValueGenerator.Next(-1000, 1000));
+                }            
             }
+            Debug.Log("Spawned");
             
             
         }
